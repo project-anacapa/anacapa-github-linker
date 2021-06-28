@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
+import {Panel, Grid} from "react-bootstrap";
 import * as PropTypes from 'prop-types';
 import CourseOrgTeamsTable from "./CourseOrgTeamsTable";
 import CourseOrgTeamMemberList from "./CourseOrgTeamMemberList";
 
-
 import OrgTeamsService from "../../../services/org-teams-service";
 import CourseOrgTeamRepoList from './CourseOrgTeamRepoList';
+import CommitsAnalytics from '../Analytics/CommitsAnalytics';
+import ChangeAnalytics from '../Analytics/ChangeAnalytics';
 
 
 class CourseOrgTeam extends Component {
@@ -31,6 +33,7 @@ class CourseOrgTeam extends Component {
         const team = this.state.team;
 
         if (team == null) return "Loading...";
+
         return (
             <Fragment>
                 <CourseOrgTeamsTable
@@ -48,6 +51,32 @@ class CourseOrgTeam extends Component {
                     team={team}
                     {...this.props}
                 />
+                <Panel>
+                    <Panel.Heading>
+                            <Panel.Title>Commit Analytics</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body>
+                        <div align="center">
+                            <CommitsAnalytics
+                                team={team}
+                                {...this.props}
+                            />
+                        </div>
+                    </Panel.Body>
+                </Panel>
+                <Panel>
+                    <Panel.Heading>
+                            <Panel.Title>Change Analytics</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body>
+                        <div align="center">
+                            <ChangeAnalytics
+                                team={team}
+                                {...this.props}
+                            />
+                        </div>
+                    </Panel.Body>
+                </Panel>
             </Fragment>
         );
     }

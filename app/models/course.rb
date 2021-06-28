@@ -249,6 +249,10 @@ class Course < ApplicationRecord
     GithubRepo.commit_csv_export_fields(repo,c)
   end
 
+  def commits
+     github_repos.map{ |repo| repo.repo_commit_events }.flatten(1)
+  end
+
   def export_commits_to_csv
     CSV.generate(headers: true) do |csv|
       csv << commit_csv_export_headers

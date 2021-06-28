@@ -12,6 +12,11 @@ module Api
       results = perform_graphql_query(query,accept)
       json_response(results.to_hash)
     end
+
+    def commits
+      @course = Course.find(params[:course_id])
+      json_response(@course.commits)
+    end
     
     private
 
